@@ -41,6 +41,9 @@ class categoriesController extends Controller
         $this->validate($request,[
             'name'=>'required',
         ]);
+
+   
+
         $category= new Category();
         $category->name= $request->name;
 
@@ -71,7 +74,7 @@ class categoriesController extends Controller
     {
         //
         $category=Category::find($id);
-        return view('category.edit')->with('category',Category::all());
+        return view('category.edit',compact('category'));
     }
 
     /**
@@ -87,7 +90,7 @@ class categoriesController extends Controller
         $category=Category::find($id);
         $category->name=$request->name;
         $category->save();
-         return back();
+         return redirect()->route('categories');   
 
     }
 
@@ -100,5 +103,9 @@ class categoriesController extends Controller
     public function destroy($id)
     {
         //
+        $category=Category::find($id);
+        $category->delete();
+    
+        return redirect()->route('categories');
     }
 }

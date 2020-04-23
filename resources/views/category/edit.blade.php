@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit category</div>  
+                <div class="card-header"> Edit :{{$category->name}}</div>  
 
                 <div class="card-body">
                 <form action="{{route('category.update',['id'=>$category->id])}}" method="POST">

@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
 use App\Post;
 
-class PostController extends Controller
-
-
-
+class postController extends Controller
 {
- 
-
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
-      
+   
     }
 
     /**
@@ -30,8 +25,10 @@ class PostController extends Controller
      */
     public function create()
     {
-          //
-          return view('posts.create');
+        //
+        $category=Category::all();
+        return view('posts.create',compact('category'));
+        //
     }
 
     /**
@@ -42,23 +39,34 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'title'=>'required',
-            'content'=>'required',
-            'featured'=>'required|image'
-        ]);
+        //
+$this->validate($request,[
+'title'=>'required',
+'content'=>'required',
+'category_id'=>'required',
+'featured'=>'required',
 
-        $post=new Post();
 
-        $post->title=$request->title;
-        $post->content=$request->content;
-        $post->featured=$request->featured;
-       $post->save();
-       return back();
-        
+]);
 
-       
-       
+$featured=$request->file('featured');
+$new_name=rand() . '.' . $featured->
+getClientOriginalExtension();
+$featured->move(public_path('uploads/posts'),$new_name);
+
+$post=Post::create([
+    
+   "title"=>$request->title,
+ "content"=>$request->content,
+  "category_id"=>$request->category_id,
+  "featured"=> $new_name
+
+]);
+
+
+
+dd($request->all());
+
     }
 
     /**
