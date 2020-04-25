@@ -5,12 +5,12 @@
     <div class="row justify-content-center"> 
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Create Post</div>
+            <div class="card-header">Edit Post {{$posts->title}}</div>
 
-                <div class="card-body">
+                <div class="card-body">    
 
 
-  <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('post.update',['id'=>$posts->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
 
@@ -25,21 +25,11 @@
     </select>
   </div>
 
-@foreach ( $tag as $tags)
-  
-
-
-  <div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" name='tagvalue[]' value="{{$tags->id}}">
-    <label class="form-check-label" >{{$tags->tag}}</label>
-  </div>
-
-@endforeach
 
                
   <div class="form-group">
     <label for="Title">Title</label>
-    <input type="text" class="form-control @error('title') is-invalid @enderror " name="title" placeholder="Entre title">
+  <input type="text" class="form-control @error('title') is-invalid @enderror " name="title" value="{{$posts->title}}">
   @error('title')
    <div class='invalid-feedback'>
    champ obligatoire*
@@ -52,7 +42,7 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Content</label>
-    <textarea class="form-control" name="content" rows="8" cols="8"></textarea>
+  <textarea class="form-control" name="content"  rows="8" cols="8">{{$posts->content}}</textarea>
   </div>
 
 
@@ -61,7 +51,7 @@
     <input type="file" class="form-control-file" name="image">
   </div>
   
-  <button type="submit" class="btn btn-primary">save</button>
+  <button type="submit" class="btn btn-primary">update</button>
 </form>
                 </div> 
             </div>

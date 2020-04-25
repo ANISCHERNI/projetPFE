@@ -34,17 +34,32 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{{route('post.create')}}">create</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="{{route('posts')}}"> show posts</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="{{route('post.trashed')}}">soft deleded posts</a>
         </div>
    
-    </ul>
+    </ul> 
+
 
     <ul class="navbar-nav mr-auto">
-    
-     
-    <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Tags
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{route('tag.create')}}">create</a>
+              <a class="dropdown-item" href="{{route('tags')}}"> show tags</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="">some thing  else</a>
+            </div>
+       
+        </ul>
+
+
+
+    <ul class="navbar-nav mr-auto">
+     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Categories
       </a>
@@ -52,7 +67,8 @@
         <a class="dropdown-item" href="{{route('category.create')}}">create</a>
         <a class="dropdown-item" href="{{route('categories')}}">categories</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Something else here</a>
+      
+  
       </div>
  
   </ul>
