@@ -81,7 +81,7 @@ $post=Post::create([
   "slug"=>str_slug($request->title)
 
 ]);
-$post->tags()->attach($request->tag);
+$post->tags()->attach($request->tagvalue);
 
 return redirect()->route('posts');
 //dd($request->all());
@@ -109,7 +109,10 @@ return redirect()->route('posts');
     {
         //
         $post=Post::find($id);
-        return view('posts.edit')->with('posts',$post)->with('category',Category::all());
+        $tag=Tag::all();
+        return view('posts.edit')->with('posts',$post)
+        ->with('category',Category::all())
+        ->with('tag',$tag);
     }
 
     /**
@@ -146,6 +149,7 @@ return redirect()->route('posts');
    $post->content = $request->content;
    $post->category_id = $request->category_id;
    $post->save();
+   $post->tags()->sync($request->tagvalue);
 
    return redirect()->route('posts');
  

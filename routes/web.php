@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+
+    
+Route::get('/','TemplateController@index');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
@@ -21,6 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
 //route for post
+
+
 
 Route::get('/posts','PostController@index')->name('posts');
 Route::get('/post/trashed','PostController@trashed')->name('post.trashed');
@@ -56,11 +61,24 @@ Route::get('/tag','TagController@index')->name('tags');
 Route::get('/tag/edit/{id}','TagController@edit')->name('tag.edit');
 Route::post('/tag/update/{id}','TagController@update')->name('tag.update');
 
+//users 
+Route::get('/users','UsersController@index')->name('users');
+Route::get('/users/admin/{id}','UsersController@admin')->name('users.admin');
+Route::get('/users/notadmin/{id}','UsersController@notadmin')->name('user.not.admin');
+Route::get('/users/create','UsersController@create')->name('users.create');
+Route::post('/users/store','UsersController@store')->name('users.store');
 
 
-});
+// settings 
 
-Route::get('/anis',function(){
+Route::get('/settings','SettingsContoller@index')->name('settings');
+Route::post('/settings/update','SettingsContoller@update')->name('settings.update');
 
-return App\Category::find(2)->posts;
-})->name('anis');
+
+
+// template 
+
+
+
+     });
+

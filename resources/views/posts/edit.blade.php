@@ -19,11 +19,38 @@
                 <div class="form-group">
     <label for="exampleFormControlSelect1">Categories </label>
     <select class="form-control" name="category_id">
+
     @foreach($category as $categories)
-      <option value="{{$categories->id}}">{{$categories->name}}</option>
+
+    @if ( $categories->id==$posts->category_id)
+    <option value="{{$categories->id}}" selected>{{$categories->name}}</option> 
+  
+
+    @else
+    <option value="{{$categories->id}}">{{$categories->name}}</option>
+
+    @endif
       @endforeach
     </select>
   </div>
+
+
+  <div class="form-check form-check-inline">
+  @foreach ( $tag as $tags)
+  <label class="form-check-label" >{{$tags->tag}}:</label>
+  <input class="form-check-input" type="checkbox" name='tagvalue[]'  value="{{$tags->id}}"
+    
+    @foreach ( $posts->tags as $tag)
+@if  ($tags->id==$tag->id)
+   
+checked 
+@endif
+@endforeach
+> 
+@endforeach
+
+</div>
+
 
 
                

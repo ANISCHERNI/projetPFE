@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -26,6 +28,44 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                    Anis Cherni 
                 </a>
+                @if (Auth::user())
+
+                @if (Auth::user()->admin)
+                    
+              
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Users
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                     
+                          <a class="dropdown-item" href="{{route('users')}}"> show users</a>
+                          <a class="dropdown-item" href="{{route('users.create')}}"> Create user</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="">other things users</a>
+                        </div>
+                   
+                    </ul> 
+
+
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             Settings
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                         
+                              <a class="dropdown-item" href="{{route('settings')}}"> show settings</a>
+                            
+                            </div>
+                       
+                        </ul> 
+
+                    @endif
+                    @endif
+
 
                 <ul class="navbar-nav mr-auto">
     <li class="nav-item dropdown">
@@ -122,6 +162,7 @@
 
         <main class="py-4">
             @yield('content')
+            @yield('site')
         </main>
     </div>
 </body>
